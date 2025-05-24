@@ -1,7 +1,7 @@
 # Space Invaders Java [NOT FINISHED]
 
 A simple Space Invaders clone written in Java using Swing.  
-This project features a player-controlled ship, alien enemies, and shooting mechanics.
+
 
 ## Features
 
