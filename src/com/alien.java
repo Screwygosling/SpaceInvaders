@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class alien extends Rectangle{
     private static final Random random = new Random();
-    private LinkedList<Point> projectiles = new LinkedList<>();
+    public LinkedList<Point> projectiles = new LinkedList<>();
     private final int MAX_PROJECTILES = 10;
     int xVelocity;
 

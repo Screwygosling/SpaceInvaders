@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class Player extends Rectangle{
 
-    private LinkedList<Point> projectiles = new LinkedList<>();
+    public LinkedList<Point> projectiles = new LinkedList<>();
     private int speed = 20;
     private int health = 3;
     private boolean canShoot = true;

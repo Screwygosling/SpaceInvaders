@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
@@ -134,6 +136,33 @@ public class invaderspanel extends JPanel implements Runnable {
                         a1.x += a1.width / 2;
                         a2.x -= a2.width / 2;
                     }
+                }
+            }
+        }
+
+        // collision detection between player and alien projectiles
+        for (alien a : aliens) {
+            for (int i = 0; i < a.projectiles.size(); i++) {
+                Point p = a.projectiles.get(i);
+                if (player.intersects(new Rectangle(p.x, p.y, 4, 10))) {
+                    player.x = WIN_WIDTH / 2 - player.width / 2;
+                    player.y = WIN_HEIGHT - player.height - 10;
+                    a.projectiles.remove(i);
+                }
+            }
+        }
+
+        // collision between player projectiles and aliens
+        for (int i = 0; i < player.projectiles.size(); i++) {
+            Point p = player.projectiles.get(i);
+            Rectangle projectileRect = new Rectangle(p.x, p.y, 4, 10);
+            for (int j = 0; j < aliens.size(); j++) {
+                alien a = aliens.get(j);
+                if (a.intersects(projectileRect)) {
+                    aliens.remove(j);
+                    player.projectiles.remove(i);
+                    i--;
+                    break;
                 }
             }
         }
