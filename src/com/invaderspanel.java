@@ -18,11 +18,9 @@ public class invaderspanel extends JPanel implements Runnable {
 
     Player player;
     
-    
     Thread thread;
     Graphics g;
-    private Image ship;
-    private Image background;
+
 
     invaderspanel() {
         this.setPreferredSize(WINDOW);
@@ -61,6 +59,9 @@ public class invaderspanel extends JPanel implements Runnable {
         aliens.forEach(alien -> {
             alien.move();
         });
+        aliens.forEach(alien -> {
+            alien.updateProjectiles();
+        });
     }
     
     @Override
@@ -96,21 +97,31 @@ public class invaderspanel extends JPanel implements Runnable {
     }
 
     public void checkCollision() {
+        // collision detection for player and walls
+        if (player.y + player.height <= 0) {
+            player.y = WIN_HEIGHT - player.height;
+        }
+        if (player.y >= WIN_HEIGHT) {
+            player.y = -player.height;
+        }
         if (player.x + player.width <= 0) {
             player.x = WIN_WIDTH - player.width;
         }
         if (player.x >= WIN_WIDTH) {
             player.x = -player.width;
         }
+
+        // collision detection for aliens and walls
         aliens.forEach(alien -> {
             if (alien.x + alien.width <= 0) {
-                alien.x = WIN_WIDTH - alien.width;
+                alien.x = alien.x * 2;
             }
             if (alien.x >= WIN_WIDTH) {
-                alien.x = -alien.width;
+                alien.x = alien.x / 2;
             }
         });
 
+        // collision detection between player and aliens
         for (int i = 0; i < aliens.size(); i++) {
             for (int j = i + 1; j < aliens.size(); j++) {
                 alien a1 = aliens.get(i);
