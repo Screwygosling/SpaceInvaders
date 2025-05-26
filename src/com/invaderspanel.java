@@ -3,7 +3,6 @@ package SpaceInvaders.src.com;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -19,6 +18,7 @@ public class invaderspanel extends JPanel implements Runnable {
     private java.util.List<alien> aliens = new java.util.ArrayList<>();
 
     Player player;
+    health health;
     
     Thread thread;
     Graphics g;
@@ -30,6 +30,7 @@ public class invaderspanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         
         createObjects();
+        health = new health(WIN_WIDTH, WIN_HEIGHT);
 
         this.addKeyListener(new ActionListener());
 
@@ -76,6 +77,7 @@ public class invaderspanel extends JPanel implements Runnable {
         aliens.forEach(alien -> {
             alien.draw(g);
         });
+        health.draw(g);
     }
     
     public void run(){
@@ -148,6 +150,8 @@ public class invaderspanel extends JPanel implements Runnable {
                     player.x = WIN_WIDTH / 2 - player.width / 2;
                     player.y = WIN_HEIGHT - player.height - 10;
                     a.projectiles.remove(i);
+                    i--;
+                    health.playerhealth--;
                 }
             }
         }
