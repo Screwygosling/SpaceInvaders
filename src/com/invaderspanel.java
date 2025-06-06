@@ -44,7 +44,7 @@ public class invaderspanel extends JPanel implements Runnable {
         //first row of aliens
         aliens.add(new alien(100, 100, 50, 50));
         aliens.add(new alien(200, 100, 50, 50));
-        aliens. add(new alien(300, 100, 50, 50));
+        aliens.add(new alien(300, 100, 50, 50));
         aliens.add(new alien(400, 100, 50, 50));
         aliens.add(new alien(500, 100, 50, 50));
         aliens.add(new alien(600, 100, 50, 50));
