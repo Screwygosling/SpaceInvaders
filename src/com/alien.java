@@ -6,11 +6,14 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class alien extends Rectangle{
     private static final Random random = new Random();
     public LinkedList<Point> projectiles = new LinkedList<>();
     private final int MAX_PROJECTILES = 10;
+    private Image alienImage;
     int xVelocity;
 
     alien(int x, int y, int width, int height) {
@@ -44,9 +47,14 @@ public class alien extends Rectangle{
         projectiles.removeIf(p -> p.y > 1000);
     }
 
+    public void loadImages() {
+        ImageIcon icon = new ImageIcon("C:\\Users\\Reuther Felias\\projects\\SpaceInvaders\\src\\resources\\alien.png");
+        alienImage = icon.getImage();
+    }
+
+
     public void draw(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(x, y, width, height);
+        g.drawImage(alienImage, x, y, width, height, null);
 
         g.setColor(Color.GRAY);
         for (Point p : projectiles) {

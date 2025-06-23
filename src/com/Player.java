@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Player extends Rectangle{
 
@@ -16,6 +18,7 @@ public class Player extends Rectangle{
     int yVelocity;
     int xVelocity;
     private final int MAX_PROJECTILES = 10;
+    private Image playerImage;
 
     Player(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -116,10 +119,14 @@ public class Player extends Rectangle{
                 break;
         }
     }
+
+    public void loadImage() {
+        ImageIcon icon = new ImageIcon("C:\\Users\\Reuther Felias\\projects\\SpaceInvaders\\src\\resources\\player.png");
+        playerImage = icon.getImage();
+    }
  
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect(this.x, this.y, this.width, this.height);
+        g.drawImage(playerImage, x, y, width, height, null);
 
         g.setColor(Color.YELLOW);
         for (Point p : projectiles) {
